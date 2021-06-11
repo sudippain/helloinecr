@@ -1,0 +1,23 @@
+version: "3.9"
+services: 
+    web:
+      image: hello_image
+      build:
+        context: .
+        dockerfile: .
+      deploy:
+        mode: replicated
+        replicas: 3
+      restart: always
+      ports:
+        - 9001-9003:8080
+      networks:
+        - overlay-network
+      healthcheck:
+        test: "exit 0"
+
+networks:
+  overlay-network:
+    driver: bridge
+        
+      
